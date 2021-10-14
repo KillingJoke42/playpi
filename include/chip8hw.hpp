@@ -73,6 +73,7 @@ public:
         memset(V, 0, sizeof(V));
         memset(disp, 0, sizeof(disp));
         memset(key, 0, sizeof(key));
+        memset(stack, 0, sizeof(stack));
 
         pc = 0x200;
         I = 0;

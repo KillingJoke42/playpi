@@ -27,11 +27,11 @@ void chip8hw::dumpRegs(void) {
         cout << endl;
     }
     cout << "I: " << hex << (int) I << dec << endl;
-    cout << "pc: " << hex << (int) I << dec << endl;
-    cout << "delay_timer: " << hex << (int) I << dec << endl;
-    cout << "sound_timer: " << hex << (int) I << dec << endl << endl;
+    cout << "pc: " << hex << (int) pc << dec << endl;
+    cout << "delay_timer: " << hex << (int) delay_timer << dec << endl;
+    cout << "sound_timer: " << hex << (int) sound_timer << dec << endl << endl;
 
-    cout << "sp: " << hex << (int) I << dec << endl;
+    cout << "sp: " << hex << (int) sp << dec << endl;
     cout << "Stack: " << endl;
     for (int j = 0; j < 2; j++) {
         for (int i = 0; i < 8; i++)
@@ -162,7 +162,7 @@ void chip8hw::emulateCycle(void) {
             break;
 
         case 0xA:
-            V[DECODE_OP(0xF000, 12)] = DECODE_OP(0x0FFF, 0);
+            I = DECODE_OP(0x0FFF, 0);
             pc += 2;
             break;
 
@@ -264,11 +264,10 @@ void chip8hw::loadGame(string gameLocation) {
         u_int16_t counter = 0;
 
         while (!fptr.eof()) {
-            fptr >> buffer;
-            mem[0x200 + (counter++)] = buffer;
+            buffer = fptr.get();
+            mem[0x200 + counter++] = buffer;
         }
 
         fptr.close();
     }
-    return;
 }
