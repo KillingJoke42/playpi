@@ -22,6 +22,8 @@
 #define CHIP8_DISPLAY_Y         32
 #define CHIP8_KEY_COUNT         16
 
+#define DECODE_OP(mask, shift) ((opcode & mask) >> shift)
+
 using namespace std;
 
 /* 
@@ -84,7 +86,9 @@ public:
         }    
     }
 
-    void loadGame(string game);
+    void memDump(void);
+    void dumpRegs(void);
+    void loadGame(string gameLocation);
     void emulateCycle(void);
     void setKeys(void);
     void dispClear(void);
