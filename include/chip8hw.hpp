@@ -21,6 +21,7 @@
 #define CHIP8_DISPLAY_X         64
 #define CHIP8_DISPLAY_Y         32
 #define CHIP8_KEY_COUNT         16
+#define CHIP8_FONTSET_ADDR      0x00
 
 #define DECODE_OP(mask, shift) ((opcode & mask) >> shift)
 

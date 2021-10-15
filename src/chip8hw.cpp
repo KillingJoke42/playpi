@@ -41,8 +41,8 @@ void chip8hw::dumpRegs(void) {
 }
 
 void chip8hw::memDump(void) {
-    for (int j = 0; j < 64; j++) {
-        for (int i = 0; i < 64; i++)
+    for (int j = 0; j < 128; j++) {
+        for (int i = 0; i < 32; i++)
             cout << hex << (int)mem[(j*8)+i] << " " << dec;
         cout << endl;
     }
@@ -222,7 +222,10 @@ void chip8hw::emulateCycle(void) {
                     break;
 
                 case 0x9:
-                    // Set I as sprite addr stored in Vx
+                    I = CHIP8_FONTSET_ADDR + (5 * V[DECODE_OP(0x0F00, 8)]);
+                    for (int i = 0; i < 5; i++)
+                        cout << hex << (int) (I+i) << " ";
+                    cout << endl;
                     break;
 
                 case 0x3:
