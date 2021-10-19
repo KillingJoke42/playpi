@@ -19,6 +19,54 @@ bool chip8hw::drawFlag(void) {
     return (V[15] ? true : false);
 }
 
+void chip8hw::setKeys(u_int8_t key, int x, int y) {
+    if(key == 27)    // esc
+		exit(0);
+
+	if(key == '1')	    chip8hw::key[0x1] = 1;
+	else if(key == '2')	chip8hw::key[0x2] = 1;
+	else if(key == '3')	chip8hw::key[0x3] = 1;
+	else if(key == '4')	chip8hw::key[0xC] = 1;
+
+	else if(key == 'q')	chip8hw::key[0x4] = 1;
+	else if(key == 'w')	chip8hw::key[0x5] = 1;
+	else if(key == 'e')	chip8hw::key[0x6] = 1;
+	else if(key == 'r')	chip8hw::key[0xD] = 1;
+
+	else if(key == 'a')	chip8hw::key[0x7] = 1;
+	else if(key == 's')	chip8hw::key[0x8] = 1;
+	else if(key == 'd')	chip8hw::key[0x9] = 1;
+	else if(key == 'f')	chip8hw::key[0xE] = 1;
+
+	else if(key == 'z')	chip8hw::key[0xA] = 1;
+	else if(key == 'x')	chip8hw::key[0x0] = 1;
+	else if(key == 'c')	chip8hw::key[0xB] = 1;
+	else if(key == 'v')	chip8hw::key[0xF] = 1;
+}
+
+void chip8hw::resetKeys(u_int8_t key, int x, int y) {
+
+	if(key == '1')	    chip8hw::key[0x1] = 0;
+	else if(key == '2')	chip8hw::key[0x2] = 0;
+	else if(key == '3')	chip8hw::key[0x3] = 0;
+	else if(key == '4')	chip8hw::key[0xC] = 0;
+
+	else if(key == 'q')	chip8hw::key[0x4] = 0;
+	else if(key == 'w')	chip8hw::key[0x5] = 0;
+	else if(key == 'e')	chip8hw::key[0x6] = 0;
+	else if(key == 'r')	chip8hw::key[0xD] = 0;
+
+	else if(key == 'a')	chip8hw::key[0x7] = 0;
+	else if(key == 's')	chip8hw::key[0x8] = 0;
+	else if(key == 'd')	chip8hw::key[0x9] = 0;
+	else if(key == 'f')	chip8hw::key[0xE] = 0;
+
+	else if(key == 'z')	chip8hw::key[0xA] = 0;
+	else if(key == 'x')	chip8hw::key[0x0] = 0;
+	else if(key == 'c')	chip8hw::key[0xB] = 0;
+	else if(key == 'v')	chip8hw::key[0xF] = 0;
+}
+
 void chip8hw::dumpRegs(void) {
     cout << "V Regs: " << endl;
     for (int j = 0; j < 2; j++) {
@@ -55,6 +103,9 @@ void chip8hw::emulateCycle(void) {
 
     u_int8_t sep;
     u_int16_t regref, rev_regref;
+
+    u_int16_t drawX, drawY;
+    u_int8_t pixel;
 
     // Decode and Execute opcode
     switch (DECODE_OP(0xF000, 12)) {
@@ -177,7 +228,21 @@ void chip8hw::emulateCycle(void) {
             break;
 
         case 0xD:
-            // Draw Graphics
+            drawX = V[DECODE_OP(0x0F00, 8)];
+            drawY = V[DECODE_OP(0x00F0, 4)];
+            V[0xF] = 0;
+
+            for (u_int8_t yline = 0; yline < DECODE_OP(0x000F, 0); yline++) {
+                pixel = mem[I+yline];
+
+                for (u_int8_t xline = 0; xline < 8; xline++) {
+                    if (pixel & (0x80 >> xline)) {
+                        if (disp[drawX + xline + ((drawY + yline) * 64)] == 1)
+                            V[0xF] = 1;
+                        disp[drawX + xline + ((drawY + yline) * 64)] ^= 1;
+                    }
+                }
+            }
             pc += 2;
             break;
 

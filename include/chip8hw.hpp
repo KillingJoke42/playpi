@@ -92,7 +92,8 @@ public:
     void dumpRegs(void);
     void loadGame(string gameLocation);
     void emulateCycle(void);
-    void setKeys(void);
+    void setKeys(u_int8_t key, int x, int y);
+    void resetKeys(u_int8_t key, int x, int y);
     void dispClear(void);
     bool drawFlag(void);
     u_int8_t getKeyPressed(void);
