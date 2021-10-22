@@ -62,12 +62,14 @@ class chip8hw {
     // Timers
     u_int8_t delay_timer;
     u_int8_t sound_timer;
-
+public:
     // Miscellaneous
     u_int8_t disp[CHIP8_DISPLAY_X * CHIP8_DISPLAY_Y];
     u_int8_t key[CHIP8_KEY_COUNT]; // u_int8_t key;
 
-public:
+    // booleans
+    bool startDraw;
+
     //Constructor
     chip8hw() {
         memset(mem, 0, sizeof(mem));
@@ -96,6 +98,7 @@ public:
     void resetKeys(u_int8_t key, int x, int y);
     void dispClear(void);
     bool drawFlag(void);
+    void drawGraphics(void);
     u_int8_t getKeyPressed(void);
 };
 

@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <bits/stdc++.h>
+#include <GL/glut.h>
 
 using namespace std;
 
@@ -100,6 +101,8 @@ void chip8hw::emulateCycle(void) {
     // Fetch opcode
     u_int16_t opcode = (mem[pc] << 8) | mem[pc + 1];
     cout << hex << (int) opcode << endl;
+
+    bool keyPressed = false;
 
     u_int8_t sep;
     u_int16_t regref, rev_regref;
@@ -260,7 +263,16 @@ void chip8hw::emulateCycle(void) {
                     break;
                 
                 case 0xA:
-                    while(!(V[DECODE_OP(0x0F00, 8)] = (u_int16_t) getKeyPressed()));
+                    while(!keyPressed) {
+                        for(int i = 0; i < 16; i++) {
+                            if (key[i]) {
+                                V[DECODE_OP(0x0F00, 8)] = i;
+                                keyPressed = true;
+                            }
+                        }
+                    }
+
+                    pc += 2;
                     break;
 
                 case 0x5:
