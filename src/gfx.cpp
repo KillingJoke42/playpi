@@ -86,7 +86,7 @@ void keyboardUp(u_int8_t key, int x, int y) {
 	c8.resetKeys(key, x, y);
 }
 
-/*void reshape_window(GLsizei w, GLsizei h) {
+void reshape_window(GLsizei w, GLsizei h) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -96,4 +96,4 @@ void keyboardUp(u_int8_t key, int x, int y) {
 
 	display_height = h;
 	display_width = w;
-} */
+}

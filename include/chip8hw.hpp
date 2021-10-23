@@ -87,7 +87,7 @@ public:
         // Loading fonts into memory
         for (u_int8_t i = 0; i < 80; i++) {
             mem[i] = chip8_fontset[i];
-        }    
+        }  
     }
 
     void memDump(void);

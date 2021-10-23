@@ -246,6 +246,8 @@ void chip8hw::emulateCycle(void) {
                     }
                 }
             }
+
+            startDraw = true;
             pc += 2;
             break;
 
@@ -327,10 +329,6 @@ void chip8hw::emulateCycle(void) {
             if (sound_timer == 1) cout << "BEEP!" << endl;
             sound_timer--;
         }
-}
-
-u_int8_t chip8hw::getKeyPressed(void) {
-    return 0x1;
 }
 
 void chip8hw::loadGame(string gameLocation) {

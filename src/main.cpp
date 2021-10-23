@@ -9,12 +9,13 @@ int main(int argc, char **argv) {
     loadGameCallback("/home/anantraina/roms/chip8/pong.rom");
 
     glutInit(&argc, argv);
-    glutInitWindowSize(CHIP8_DISPLAY_X, CHIP8_DISPLAY_Y);
+    glutInitWindowSize(display_width, display_height);
     glutInitWindowPosition(320, 320);
     glutCreateWindow("CHIP8");
 
     glutDisplayFunc(drawTextures);
     glutIdleFunc(drawTextures);
+    glutReshapeFunc(reshape_window);
     glutKeyboardFunc(keyboardDown);
     glutKeyboardFunc(keyboardUp);
 
