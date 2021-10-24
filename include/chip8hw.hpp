@@ -87,7 +87,9 @@ public:
         // Loading fonts into memory
         for (u_int8_t i = 0; i < 80; i++) {
             mem[i] = chip8_fontset[i];
-        }    
+        }  
+
+        startDraw = true;
     }
 
     void memDump(void);
@@ -99,7 +101,7 @@ public:
     void dispClear(void);
     bool drawFlag(void);
     void drawGraphics(void);
-    u_int8_t getKeyPressed(void);
+    void debugRender(void);
 };
 
 #endif
