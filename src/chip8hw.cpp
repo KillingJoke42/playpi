@@ -9,6 +9,7 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <GL/glut.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -100,7 +101,10 @@ void chip8hw::memDump(void) {
 void chip8hw::emulateCycle(void) {
     // Fetch opcode
     u_int16_t opcode = (mem[pc] << 8) | mem[pc + 1];
-    cout << hex << (int) opcode << endl;
+    // cout << hex << (int) opcode << endl;
+    //debugRender();
+    //system("clear");
+    usleep(1000);
 
     bool keyPressed = false;
 
@@ -115,6 +119,7 @@ void chip8hw::emulateCycle(void) {
         case 0x0:
             if (opcode == 0x00E0) {
                 dispClear();
+                startDraw = true;
                 pc += 2;
             }
             else if (opcode == 0x00EE) {
@@ -261,7 +266,7 @@ void chip8hw::emulateCycle(void) {
         case 0xF:
             switch (DECODE_OP(0x000F, 0)) {
                 case 0x7:
-                    V[DECODE_OP(0x000F, 0)] = delay_timer;
+                    V[DECODE_OP(0x0F00, 0)] = delay_timer;
                     break;
                 
                 case 0xA:
@@ -302,9 +307,9 @@ void chip8hw::emulateCycle(void) {
 
                 case 0x9:
                     I = CHIP8_FONTSET_ADDR + (5 * V[DECODE_OP(0x0F00, 8)]);
-                    for (int i = 0; i < 5; i++)
+                    /*for (int i = 0; i < 5; i++)
                         cout << hex << (int) (I+i) << " ";
-                    cout << endl;
+                    cout << endl;*/
                     break;
 
                 case 0x3:
@@ -348,4 +353,22 @@ void chip8hw::loadGame(string gameLocation) {
 
         fptr.close();
     }
+}
+
+void chip8hw::debugRender(void)
+{
+	// Draw
+	for(int y = 0; y < 32; ++y)
+	{
+		for(int x = 0; x < 64; ++x)
+		{
+			if(disp[(y*64) + x] == 0) 
+				cout << "|";
+			else 
+				cout << " ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+    system("clear");
 }
