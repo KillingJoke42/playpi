@@ -3,6 +3,7 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include "../include/chip8hw.hpp"
+#include "../include/simplegui.hpp"
 
 using namespace std;
 
@@ -25,7 +26,8 @@ void loadGameCallback(string game) {
 }
 
 int main(int argc, char **argv) {
-    loadGameCallback("/home/anantraina/roms/chip8/invaders.c8");
+	start_form(argc, argv);
+    loadGameCallback(romfile);
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
