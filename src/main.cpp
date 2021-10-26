@@ -5,6 +5,8 @@
 #include "../include/chip8hw.hpp"
 #include "../include/simplegui.hpp"
 
+#define MAXIMIZED
+
 using namespace std;
 
 chip8hw c8;
@@ -31,8 +33,13 @@ int main(int argc, char **argv) {
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowSize(display_width, display_height);
+#ifdef MAXIMIZED
+    glutInitWindowSize(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
+    glutInitWindowPosition(0, 0);
+#else
+	glutInitWindowSize(display_width, display_height);
     glutInitWindowPosition(320, 320);
+#endif
     glutCreateWindow("CHIP8");
 
     glutDisplayFunc(display);
