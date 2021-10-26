@@ -30,7 +30,7 @@ int start_form(int argc, char **argv) {
     gtk_init(&argc, &argv);
     
     GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(window), "CHIP8 ROM SELECT");
+    gtk_window_set_title(GTK_WINDOW(window), "ROM SELECT");
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     // gtk_window_set_default_size(GTK_WINDOW(window), 640, 320);
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
@@ -38,7 +38,7 @@ int start_form(int argc, char **argv) {
     GtkWidget* chooserom_label = gtk_label_new_with_mnemonic("Pick a CHIP8 ROM file: ");
 
     GtkWidget* btn = gtk_file_chooser_button_new("Open ROM", GTK_FILE_CHOOSER_ACTION_OPEN);
-    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(btn), "/home/anantraina/");
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(btn), "/home/");
     g_signal_connect(GTK_FILE_CHOOSER_BUTTON(btn), "file-set", G_CALLBACK(on_file_chosen), NULL);
     
     GtkWidget* srbtn = gtk_button_new_with_label("Start ROM");
