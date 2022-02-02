@@ -1,4 +1,4 @@
-# PlayPi
+# PlayPi - Emulation System for the Raspberry Pi
 
 An emulation hub coupled with XBOX 360 Controller for the Raspberry Pi
 <p>PlayPi is a multiple system in one emulator for the Raspberry Pi. As of 03-10-2021, support for the following systems is planned:</p>
