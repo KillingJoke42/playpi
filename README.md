@@ -32,7 +32,7 @@ An emulation hub coupled with XBOX 360 Controller for the Raspberry Pi
 <tbody>
 <tr>
 <td>CHIP-8</td>
-<td>In-Progress</td>
+<td>Done</td>
 </tr>
 <tr>
 <td>Controller Setup</td>
@@ -40,7 +40,7 @@ An emulation hub coupled with XBOX 360 Controller for the Raspberry Pi
 </tr>
 <tr>
 <td>GUI Interface</td>
-<td>Pending</td>
+<td>Done</td>
 </tr>
 <tr>
 <td>NES</td>
